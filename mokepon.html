@@ -1,75 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MOKEPON</title>
-        <script src="./js/mokepon.js"></script>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Revolution</title>
+  <script src="./js/mokepon.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    #mensaje-mascota {
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <p id="mensaje-mascota"></p>
+  <div id="mensaje-container">
+    <img id="imagen-seleccionada" src="" alt="Mascota seleccionada">
+    <p id="mensaje-mascota"></p>
+</div>
+  <!-- Sección para seleccionar la mascota -->
+  <section id="seleccionar-mascota">
+    <h1 class="titulo">Pokemon Revolution</h1>
+    <h2 class="subtitulo">Elige tu Mascota 🤩:</h2>
+    <div class="tarjetas">
+      <label class="tarjeta-de-mokepon" for="hipodoge">
+        <p>Hipodoge</p>
+        <img src="./assets/hipodoge.png" alt="Hipodoge">
+      </label>
+      <input type="radio" name="mascota" id="hipodoge">
 
-    <body>
-        <section id="seleccionar-mascota">
-            <h1 class="titulo">Mokepon</h1>
+      <label class="tarjeta-de-mokepon" for="capipepo">
+        <p>Capipepo</p>
+        <img src="./assets/capipepo.png" alt="Capipepo">
+      </label>
+      <input type="radio" name="mascota" id="capipepo">
 
-            <h2 class="subtitulo">Elige tu Mascota:</h2>
+      <label class="tarjeta-de-mokepon" for="ratigueya">
+        <p>Ratigueya</p>
+        <img src="./assets/ratigueya.png" alt="Ratigueya">
+      </label>
+      <input type="radio" name="mascota" id="ratigueya">
 
-            <div class="tarjetas">
-                <label class="tarjeta-de-mokepon" for="hipodoge">
-                    <P>Hipodoge</P>
-                    <img src="./assets/hipodoge.png" alt="Hipodoge">
-                </label>
-                <input type="radio" name="mascota" id="hipodoge">
-    
-                <label class="tarjeta-de-mokepon" for="capipepo">
-                    <p>Capipepo</p>
-                    <img src="assets/capipepo.png" alt="Capipepo">
-                </label>
-                <input type="radio" name="mascota" id="capipepo">
-    
-                <label class="tarjeta-de-mokepon" for="ratigueya">
-                    <p>Ratigueya</p>
-                    <img src="assets/ratigueya.png" alt="Ratigueya">
-                </label>
-                <input type="radio" name="mascota" id="ratigueya">
-            </div>
+      <label class="tarjeta-de-mokepon" for="dragonite">
+        <p>Dragonite</p>
+        <img src="assets/dragonite.jpeg" alt="Dragonite">
+      </label>
+      <input type="radio" name="mascota" id="dragonite">
 
-            <button id="boton-mascota">Seleccionar</button>
-        </section>
+      <label class="tarjeta-de-mokepon" for="fenix">
+        <p>Fénix</p>
+        <img src="assets/Fénix.jpeg" alt="Fénix">
+      </label>
+      <input type="radio" name="mascota" id="fenix">
 
+      <!-- Nuevos personajes -->
+      <label class="tarjeta-de-mokepon" for="flamix">
+        <p>Flamix</p>
+        <img src="./assets/flamix.jpeg" alt="Flamix">
+      </label>
+      <input type="radio" name="mascota" id="flamix">
 
-        <section id="seleccionar-ataque">
-            <h1 class="titulo">Mokepon</h1>
-            <h2 class="subtitulo">Elige tu Ataque:</h2>
-            
-            <div>
-                <button id="boton-fuego" class="boton-ataque">Fuego 🔥</button>
-                <button id="boton-agua" class="boton-ataque">Agua 💧</button>
-                <button id="boton-tierra" class="boton-ataque">Tierra 🌱</button>
-            </div>
+      <label class="tarjeta-de-mokepon" for="aqua">
+        <p>Aqua</p>
+        <img src="./assets/aqua.jpeg" alt="Aqua">
+      </label>
+      <input type="radio" name="mascota" id="aqua">
+    </div>
+    <button id="boton-mascota" onclick="seleccionarMascotaJugador()">Seleccionar</button>
+  </section>
 
+  <p id="mensaje-mascota"></p>
 
-            <div id="mensajes">
-                <p id="resultado">Mucha Suerte!</p>
+  <!-- Sección para seleccionar el ataque -->
+  <section id="seleccionar-ataque">
+    <h1 class="titulo">Mokepon</h1>
+    <h2 class="subtitulo">Elige tu Ataque:</h2>
+    <div>
+      <button id="boton-fuego" class="boton-ataque">🔥 Fuego</button>
+      <button id="boton-agua" class="boton-ataque">💧 Agua</button>
+      <button id="boton-tierra" class="boton-ataque">🌱 Tierra</button>
+    </div>
+    <div id="mensajes">
+      <p id="resultado">¡Mucha suerte!</p>
+      <!-- Botón para reiniciar el combate sin volver a seleccionar mascota -->
+      <button id="boton-reiniciar">Reiniciar</button>
+      <!-- Botón para volver al inicio (recarga la página) -->
+      <button id="boton-volver">Volver al inicio</button>
+    </div>
+    <div class="ataques">
+      <div>
+        <p>Vidas: <span id="vidas-jugador">5</span></p>
+        <p>Mascota: <span id="mascota-jugador"></span></p>
+      </div>
+      <div>
+        <p>Vidas: <span id="vidas-enemigo">5</span></p>
+        <p>Enemigo: <span id="mascota-enemigo"></span></p>
+      </div>
+    </div>
+  </section>
 
-                <section id="reiniciar">
-                    <button id="boton-reiniciar">Reiniciar</button>
-                </section>
-            </div>
+  <script>
+    function seleccionarMascotaJugador() {
+      const mascota = document.querySelector("input[name='mascota']:checked");
+      if (!mascota) {
+        alert("Debes seleccionar una mascota.");
+        return;
+      }
+      document.getElementById("mascota-jugador").textContent = mascota.id;
+      document.getElementById("seleccionar-mascota").style.display = "none";
+      document.getElementById("seleccionar-ataque").style.display = "flex";
+      document.getElementById("mensaje-mascota").textContent = "Has seleccionado: " + mascota.id;
+      seleccionarMascotaEnemigo();
+    }
+  </script>
 
-            <div class="ataques">
-                <div>
-                    <p id="vidas-jugador">3</p>
-                    <p id="mascota-jugador"></p>
-                    <p id="ataques-del-jugador"></p>
-                </div>
+<script>
+  function girarPersonajes() {
+    const personajes = document.querySelectorAll(".tarjeta-de-mokepon img");
+    personajes.forEach((personaje) => {
+      personaje.classList.add("girar");
+      setTimeout(() => {
+        personaje.classList.remove("girar");
+      }, 1000); // Duración de la animación
+    });
+  }
 
-                <div>
-                    <p id="vidas-enemigo">3</p>
-                    <p id="mascota-enemigo"></p>
-                    <p id="ataques-del-enemigo"></p>
-                </div>                
-            </div>
-        </section>
-    </body>
+  // Hacer que se gire cada 10 segundos
+  setInterval(girarPersonajes, 10000);
+</script>
+</body>
 </html>
